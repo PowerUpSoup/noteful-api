@@ -15,6 +15,7 @@ const NotesService = {
       return knex.from('noteful_notes').select('*').where('id', id).first()
     },
     deleteNote(knex, id) {
+      console.log("delete")
       return knex('noteful_notes')
         .where({ id })
         .delete()

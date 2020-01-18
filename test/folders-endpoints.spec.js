@@ -78,7 +78,7 @@ describe('Folder Endpoints', function () {
     describe(`POST /api/folders`, () => {
         it(`creates a folder, responding with 201 and the new folder`, () => {
             const newFolder = {
-                title: 'Test new folder',
+                name: 'Test new folder',
                 id: 1,
             }
             return supertest(app)
@@ -86,7 +86,7 @@ describe('Folder Endpoints', function () {
                 .send(newFolder)
                 .expect(201)
                 .expect(res => {
-                    expect(res.body.title).to.eql(newFolder.title)
+                    expect(res.body.name).to.eql(newFolder.name)
                     expect(res.body).to.have.property('id')
                     expect(res.headers.location).to.eql(`/api/folders/${res.body.id}`)
                     const expected = new Date().toLocaleString()
@@ -101,7 +101,7 @@ describe('Folder Endpoints', function () {
         })
     })
 
-    const requiredFields = ['title']
+    const requiredFields = ['name']
 
     requiredFields.forEach(field => {
         const newFolder = {
@@ -176,7 +176,7 @@ describe('Folder Endpoints', function () {
             it('responds with 204 and updates the folder', () => {
                 const idToUpdate = 2
                 const updateFolder = {
-                    title: 'updated folder title',
+                    name: 'updated folder name',
                 }
                 const expectedFolder = {
                     ...testFolders[idToUpdate - 1],
@@ -200,7 +200,7 @@ describe('Folder Endpoints', function () {
                     .send({ irrelevantField: 'foo' })
                     .expect(400, {
                         error: {
-                            message: `Request body must contain 'title'`
+                            message: `Request body must contain 'name'`
                         }
                     })
             })
@@ -208,7 +208,7 @@ describe('Folder Endpoints', function () {
             it(`responds with 204 when updating only a subset of fields`, () => {
                 const idToUpdate = 2
                 const updateFolder = {
-                    title: 'updated folder title',
+                    name: 'updated folder name',
                 }
                 const expectedFolder = {
                     ...testFolders[idToUpdate - 1],

@@ -114,7 +114,7 @@ describe('Notes Endpoints', function () {
             expect(res.body).to.have.property('id')
             expect(res.headers.location).to.eql(`/api/notes/${res.body.id}`)
             const expected = new Date().toLocaleString()
-            const actual = new Date(res.body.date_created).toLocaleString()
+            const actual = new Date(res.body.modified).toLocaleString()
             expect(actual).to.eql(expected)
           })
           .then(res =>
