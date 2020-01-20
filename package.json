@@ -8,7 +8,7 @@
     "migrate:test": "env NODE_ENV=test npm run migrate",
     "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) npm run migrate",
     "start": "node src/server.js",
-    "predeploy": "npm audit",
+    "predeploy": "npm audit && npm run migrate:production",
     "deploy": "git push heroku master",
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js"
@@ -18,9 +18,6 @@
     "url": "git+https://github.com/PowerUpSoup/express-boilerplate.git"
   },
   "keywords": [],
-  "engines": {
-    "node": "10.11.0"
-  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -31,14 +28,14 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "knex": "^0.20.8",
     "helmet": "^3.21.2",
     "morgan": "^1.9.1",
-    "pg": "^7.15.1",
+    "pg": "^7.17.1",
     "xss": "^1.0.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "knex": "^0.20.6",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.1",
     "postgrator-cli": "^3.2.0",
